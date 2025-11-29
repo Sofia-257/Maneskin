@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Måneskin | Главная</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        :root {
+            --burgundy: #800020;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        h1, h2, h3 {
+            color: var(--burgundy);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--burgundy);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            background-color: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.3);
+            border-bottom: 2px solid var(--burgundy);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--burgundy);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--burgundy);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                        url('https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/7679750d-3371-4175-9f7b-cbd20225b867/1920x') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+            color: var(--white);
+        }
+        
+        .hero h1 span {
+            color: var(--burgundy);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--burgundy);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--white);
+            color: var(--burgundy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section {
+            padding: 80px 0;
+            background-color: var(--dark-gray);
+        }
+        
+        .section-light {
+            background-color: var(--black);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--burgundy);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            cursor: pointer;
+            border: 2px solid var(--burgundy);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(128, 0, 32, 0.9));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Стили для таймлайна на главной */
+        .timeline-preview {
+            margin-top: 50px;
+        }
+        
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--burgundy);
+            z-index: 1;
+        }
+        
+        .timeline-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--black);
+            border: 3px solid var(--burgundy);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--burgundy);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-step:hover .step-circle {
+            background-color: var(--burgundy);
+            color: var(--white);
+            transform: scale(1.2);
+        }
+        
+        .step-year {
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .step-event {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        
+        .calculator-section {
+            background-color: var(--black);
+            padding: 80px 0;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .calculator {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--dark-gray);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--burgundy);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--white);
+        }
+        
+        .form-group select, 
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            background-color: var(--black);
+            color: var(--white);
+            font-size: 1rem;
+        }
+        
+        .form-group select option {
+            background-color: var(--black);
+        }
+        
+        .calculate-btn {
+            background-color: var(--burgundy);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            background-color: var(--white);
+            color: var(--burgundy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(128, 0, 32, 0.2);
+            border-left: 4px solid var(--burgundy);
+            display: none;
+            animation: fadeIn 0.5s ease;
+            color: var(--white);
+        }
+        
+        footer {
+            background-color: var(--black);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 2px solid var(--burgundy);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+        
+        .footer-section h3 span {
+            color: var(--burgundy);
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .social-links a:hover {
+            color: var(--burgundy);
+            background-color: var(--white);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid var(--burgundy);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Адаптивность */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: var(--black);
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                border-top: 2px solid var(--burgundy);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                animation: slideDown 0.5s ease;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(128, 0, 32, 0.3);
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .timeline-steps::before {
+                display: none;
+            }
+            
+            /* Анимация бургер-меню */
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+            
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+        
+        /* Анимация для кнопки расчета при наведении */
+        .calculate-btn.animating {
+            animation: pulse 0.5s ease;
+        }
+        
+        /* Стили для активной страницы в навигации */
+        .nav-links a.active {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">MÅNE<span>SKIN</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="about.html">О группе</a></li>
+                    <li><a href="history.html">История</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MÅNE<span>SKIN</span></h1>
+            <p>Итальянская рок-группа, покорившая мир своей энергией и уникальным стилем</p>
+            <a href="about.html" class="btn">Узнать больше</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>О группе</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Måneskin — итальянская рок-группа, образованная в Риме в 2016 году. В состав группы входят вокалист Дамиано Давид, басист Виктория Де Анджелис, гитарист Томас Раджи и барабанщик Итан Торкио.</p>
+                    <p>Группа приобрела мировую известность после победы на конкурсе «Евровидение-2021» с песней «Zitti e buoni». Их музыка сочетает в себе элементы хард-рока, глэм-рока и поп-музыки.</p>
+                    <p>Название группы Måneskin означает «лунный свет» на датском языке. Участники группы познакомились в школе и начали выступать на улицах Рима, прежде чем добиться международного успеха.</p>
+                    <a href="about.html" class="btn" style="margin-top: 20px;">Подробнее о группе</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://i.pinimg.com/1200x/22/de/22/22de227863c746fcc55308985080345a.jpg" alt="Måneskin группа">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-light">
+        <div class="container">
+            <h2>История группы</h2>
+            <div class="timeline-preview">
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="step-circle">1</div>
+                        <div class="step-year">2016</div>
+                        <div class="step-event">Образование группы</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-circle">2</div>
+                        <div class="step-year">2017</div>
+                        <div class="step-event">X Factor Italia</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-circle">3</div>
+                        <div class="step-year">2021</div>
+                        <div class="step-event">Победа на Евровидении</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-circle">4</div>
+                        <div class="step-year">2023</div>
+                        <div class="step-event">Альбом RUSH!</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="history.html" class="btn">Узнать полную историю</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=43a76a62ac448ae6502a15eb06c36cce_l-5490022-images-thumbs&ref=rim&n=13&w=3000&h=2000" alt="Концерт Måneskin">
+                    <div class="gallery-overlay">
+                        <h3>Живое выступление</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdnn1.img.sputnik.tj/img/07e5/05/17/1039676683_0:0:3137:1765_2072x0_60_0_0_ff1eec1a7b0d8c7335c0f921b7d94482.jpg" alt="Måneskin на евровидении">
+                    <div class="gallery-overlay">
+                        <h3>Евровидение</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/1200x/a4/c5/c6/a4c5c62b7825ed1c1f7e12188f54ecb2.jpg" alt="Måneskin на интервью">
+                    <div class="gallery-overlay">
+                        <h3>Интервью</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://api.eric.s3storage.ru/super-static/prod/612e6884f3501119c111e48d-1900x.jpeg" alt="Måneskin поклонники">
+                    <div class="gallery-overlay">
+                        <h3>Встреча с фанатами</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section">
+        <div class="container">
+            <h2>Калькулятор стоимости мерча</h2>
+            <div class="calculator">
+                <form id="merch-calculator">
+                    <div class="form-group">
+                        <label for="product">Выберите товар:</label>
+                        <select id="product" name="product">
+                            <option value="30">Футболка - 30€</option>
+                            <option value="25">Кепка - 25€</option>
+                            <option value="40">Толстовка - 40€</option>
+                            <option value="20">Плакат - 20€</option>
+                            <option value="15">Браслет - 15€</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Количество:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping">Способ доставки:</label>
+                        <select id="shipping" name="shipping">
+                            <option value="5">Стандартная доставка - 5€</option>
+                            <option value="10">Экспресс-доставка - 10€</option>
+                            <option value="0">Самовывоз - 0€</option>
+                        </select>
+                    </div>
+                    <button type="button" id="calculate" class="calculate-btn">Рассчитать стоимость</button>
+                </form>
+                <div id="result" class="result"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MÅNE<span>SKIN</span></h3>
+                    <p>Фан-сайт итальянской рок-группы</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--white); text-decoration: none;">Главная</a></li>
+                        <li style="margin-bottom: 8px;"><a href="about.html" style="color: var(--white); text-decoration: none;">О группе</a></li>
+                        <li style="margin-bottom: 8px;"><a href="history.html" style="color: var(--white); text-decoration: none;">История</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Официальные социальные сети</h3>
+                    <div class="social-links">
+                        <a href="https://music.apple.com/us/artist/måneskin/1312874741" target="_blank">AppleMusic</a>
+                        <a href="https://www.youtube.com/@maneskinofficial" target="_blank">YouTube</a>
+                        <a href="https://open.spotify.com/artist/0lAWpj5szCSwM4rUMHYmrr" target="_blank">Spotify</a>
+                        <a href="https://www.tiktok.com/@therealmaneskin?_r=1&_t=ZS-91mtiNFVNTR" target="_blank">TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Фан-сайт Måneskin. Все права на музыку принадлежат группе Måneskin.</p>
+                <p>Это неофициальный фан-сайт, созданный в образовательных целях.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигационное меню
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        
+        burger.addEventListener('click', () => {
+            // Переключение навигации
+            nav.classList.toggle('active');
+            
+            // Анимация бургер-меню
+            burger.classList.toggle('toggle');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('toggle');
+            });
+        });
+        
+        // Калькулятор стоимости мерча
+        document.getElementById('calculate').addEventListener('click', function() {
+            // Анимация кнопки
+            this.classList.add('animating');
+            setTimeout(() => {
+                this.classList.remove('animating');
+            }, 500);
+            
+            // Получение значений из формы
+            const productPrice = parseFloat(document.getElementById('product').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const shippingCost = parseFloat(document.getElementById('shipping').value);
+            
+            // Проверка валидности количества
+            if (isNaN(quantity) || quantity < 1) {
+                alert('Пожалуйста, введите корректное количество');
+                return;
+            }
+            
+            // Расчет стоимости
+            const subtotal = productPrice * quantity;
+            const total = subtotal + shippingCost;
+            
+            // Отображение результата
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <h3>Результат расчета:</h3>
+                <p>Стоимость товаров: ${subtotal.toFixed(2)}€</p>
+                <p>Стоимость доставки: ${shippingCost.toFixed(2)}€</p>
+                <p><strong>Итого: ${total.toFixed(2)}€</strong></p>
+            `;
+            resultElement.style.display = 'block';
+            
+            // Анимация появления результата
+            resultElement.style.animation = 'none';
+            setTimeout(() => {
+                resultElement.style.animation = 'fadeIn 0.5s ease';
+            }, 10);
+        });
+    </script>
+</body>
+</html>

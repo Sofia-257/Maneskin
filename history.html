@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Måneskin | История группы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        :root {
+            --burgundy: #800020;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        h1, h2, h3 {
+            color: var(--burgundy);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--burgundy);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            background-color: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.3);
+            border-bottom: 2px solid var(--burgundy);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--burgundy);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--burgundy);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                        url('https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/7679750d-3371-4175-9f7b-cbd20225b867/1920x') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+            color: var(--white);
+        }
+        
+        .hero h1 span {
+            color: var(--burgundy);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+        
+        .section {
+            padding: 80px 0;
+            background-color: var(--dark-gray);
+        }
+        
+        .section-light {
+            background-color: var(--black);
+        }
+        
+        /* Стили для таймлайна */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--burgundy);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--white);
+            border: 4px solid var(--burgundy);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -13px;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--black);
+            border: 2px solid var(--burgundy);
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
+        }
+        
+        .timeline-year {
+            color: var(--burgundy);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .milestone-card {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid var(--burgundy);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .milestone-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.3);
+        }
+        
+        .milestone-icon {
+            font-size: 3rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+        }
+        
+        .milestone-number {
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .awards-section {
+            margin-top: 50px;
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .award-card {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid var(--burgundy);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .award-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
+        }
+        
+        .award-icon {
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            min-width: 60px;
+        }
+        
+        .award-info h4 {
+            color: var(--white);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .award-info p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--black);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 2px solid var(--burgundy);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+        
+        .footer-section h3 span {
+            color: var(--burgundy);
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .social-links a:hover {
+            color: var(--burgundy);
+            background-color: var(--white);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid var(--burgundy);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Адаптивность */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: var(--black);
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                border-top: 2px solid var(--burgundy);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                animation: slideDown 0.5s ease;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(128, 0, 32, 0.3);
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 20px;
+            }
+            
+            .left::after, .right::after {
+                left: 20px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            /* Анимация бургер-меню */
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+            
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+        
+        /* Стили для активной страницы в навигации */
+        .nav-links a.active {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">MÅNE<span>SKIN</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О группе</a></li>
+                    <li><a href="history.html" class="active">История</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ИСТОРИЯ <span>ГРУППЫ</span></h1>
+            <p>Путь от уличных музыкантов до мировой рок-сенсации</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Хронология успеха</h2>
+            
+            <div class="timeline">
+                <!-- 2016 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2016</div>
+                        <div class="timeline-title">Образование группы</div>
+                        <img src="https://i.pinimg.com/1200x/d3/49/09/d349093bd8a5d855004a75a8652357a9.jpg" alt="Начало пути" class="timeline-image">
+                        <p>Группа Måneskin образована в Риме. Название, означающее "лунный свет" на датском, выбрала басистка Виктория. Участники познакомились в школе и начали выступать на улицах Рима.</p>
+                    </div>
+                </div>
+
+                <!-- 2017 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <div class="timeline-title">X Factor Italia</div>
+                        <img src="https://avatars.mds.yandex.net/i?id=b5f67c74a68c93262fb853dd1ef2a804_l-8918938-images-thumbs&n=13" alt="X Factor" class="timeline-image">
+                        <p>Участие в итальянской версии X Factor. Группа заняла второе место, но получила огромную популярность. Выпущен дебютный EP "Chosen".</p>
+                    </div>
+                </div>
+
+                <!-- 2018 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-title">Первый студийный альбом</div>
+                        <img src="https://avatars.mds.yandex.net/get-mpic/12633564/2a000001933be63d2d1379253d40247b124b/orig" alt="Первый альбом" class="timeline-image">
+                        <p>Выпуск дебютного студийного альбома "Il ballo della vita". Альбом достиг первого места в итальянском чарте и получил платиновый статус.</p>
+                    </div>
+                </div>
+
+                <!-- 2021 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-title">Победа на Евровидении</div>
+                        <img src="https://cdn.iz.ru/sites/default/files/styles/2048x1365/public/photo_item-2021-12/1639397814.jpg?itok=Nv4X31MN" alt="Евровидение" class="timeline-image">
+                        <p>Историческая победа на Евровидении-2021 с песней "Zitti e buoni". Группа принесла Италии первую победу с 1990 года.</p>
+                    </div>
+                </div>
+
+                <!-- 2021 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-title">Мировой успех</div>
+                        <img src="https://c-cdnet.cdn.smule.com/smule-gg-uw1-s-7/arr/c6/21/90cc95af-56ae-434d-8e2c-32b67089d11f_1024.jpg" alt="Мировой успех" class="timeline-image">
+                        <p>После Евровидения синглы "I Wanna Be Your Slave" и "Mammamia" покоряют мировые чарты. Группа получает международное признание.</p>
+                    </div>
+                </div>
+
+                <!-- 2023 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-title">Альбом RUSH!</div>
+                        <img src="https://i.ebayimg.com/images/g/MtQAAOSwkZFl-XUz/s-l1600.jpg" alt="RUSH!" class="timeline-image">
+                        <p>Выпуск третьего студийного альбома "RUSH!", который дебютировал в топ-10 чартов 18 стран. Начало мирового тура.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-light">
+        <div class="container">
+            <h2>Ключевые достижения</h2>
+            
+            <div class="milestones-grid">
+                <div class="milestone-card">
+                    <div class="milestone-icon">🏆</div>
+                    <div class="milestone-number">1</div>
+                    <h3>Победа на Евровидении</h3>
+                    <p>Первое место для Италии за 31 год</p>
+                </div>
+                
+                <div class="milestone-card">
+                    <div class="milestone-icon">💿</div>
+                    <div class="milestone-number">3</div>
+                    <h3>Студийных альбома</h3>
+                    <p>Каждый становился хитом</p>
+                </div>
+                
+                <div class="milestone-card">
+                    <div class="milestone-icon">🌍</div>
+                    <div class="milestone-number">50+</div>
+                    <h3>Стран мира</h3>
+                    <p>Выступали с концертами</p>
+                </div>
+                
+                <div class="milestone-card">
+                    <div class="milestone-icon">📀</div>
+                    <div class="milestone-number">5+</div>
+                    <h3>Миллиардов просмотров</h3>
+                    <p>Суммарно на YouTube</p>
+                </div>
+            </div>
+
+            <div class="awards-section">
+                <h2>Награды и номинации</h2>
+                <div class="awards-grid">
+                    <div class="award-card">
+                        <div class="award-icon">🎵</div>
+                        <div class="award-info">
+                            <h4>Победитель Евровидения 2021</h4>
+                            <p>Конкурс песни Евровидение</p>
+                        </div>
+                    </div>
+                    
+                    <div class="award-card">
+                        <div class="award-icon">🏅</div>
+                        <div class="award-info">
+                            <h4>MTV Europe Music Awards</h4>
+                            <p>Лучшая рок-группа (2021, 2022)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="award-card">
+                        <div class="award-icon">⭐</div>
+                        <div class="award-info">
+                            <h4>Billboard Music Awards</h4>
+                            <p>Лучшая рок-песня (2022)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="award-card">
+                        <div class="award-icon">🎤</div>
+                        <div class="award-info">
+                            <h4>Italian Music Awards</h4>
+                            <p>7 наград Sanremo и Wind Music Awards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MÅNE<span>SKIN</span></h3>
+                    <p>Фан-сайт итальянской рок-группы</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--white); text-decoration: none;">Главная</a></li>
+                        <li style="margin-bottom: 8px;"><a href="about.html" style="color: var(--white); text-decoration: none;">О группе</a></li>
+                        <li style="margin-bottom: 8px;"><a href="history.html" style="color: var(--white); text-decoration: none;">История</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Официальные социальные сети</h3>
+                    <div class="social-links">
+                        <a href="https://music.apple.com/us/artist/måneskin/1312874741" target="_blank">AppleMusic</a>
+                        <a href="https://www.youtube.com/@maneskinofficial" target="_blank">YouTube</a>
+                        <a href="https://open.spotify.com/artist/0lAWpj5szCSwM4rUMHYmrr" target="_blank">Spotify</a>
+                        <a href="https://www.tiktok.com/@therealmaneskin?_r=1&_t=ZS-91mtiNFVNTR" target="_blank">TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Фан-сайт Måneskin. Все права на музыку принадлежат группе Måneskin.</p>
+                <p>Это неофициальный фан-сайт, созданный в образовательных целях.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигационное меню
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('toggle');
+            });
+        });
+
+        // Анимация таймлайна при скролле
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        function checkTimeline() {
+            const triggerBottom = window.innerHeight * 0.8;
+            
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                
+                if (itemTop < triggerBottom) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+        
+        // Проверяем при загрузке и скролле
+        window.addEventListener('load', checkTimeline);
+        window.addEventListener('scroll', checkTimeline);
+    </script>
+</body>
+</html>

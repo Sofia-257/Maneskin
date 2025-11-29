@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Måneskin | О группе</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        :root {
+            --burgundy: #800020;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        h1, h2, h3 {
+            color: var(--burgundy);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--burgundy);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            background-color: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.3);
+            border-bottom: 2px solid var(--burgundy);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--burgundy);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--burgundy);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                        url('https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/7679750d-3371-4175-9f7b-cbd20225b867/1920x') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+            color: var(--white);
+        }
+        
+        .hero h1 span {
+            color: var(--burgundy);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--burgundy);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--white);
+            color: var(--burgundy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section {
+            padding: 80px 0;
+            background-color: var(--dark-gray);
+        }
+        
+        .section-light {
+            background-color: var(--black);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--burgundy);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .member-card {
+            background-color: var(--black);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--burgundy);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image {
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .member-card:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-info h3 {
+            color: var(--burgundy);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .member-role {
+            color: var(--white);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1.1rem;
+        }
+        
+        .member-bio {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .discography {
+            margin-top: 50px;
+        }
+        
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .album-card {
+            background-color: var(--black);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--burgundy);
+            transition: transform 0.3s ease;
+        }
+        
+        .album-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .album-year {
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .album-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        /* Стили для музыкальных достижений */
+        .achievements {
+            margin-top: 50px;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .achievement-card {
+            background-color: var(--black);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--burgundy);
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
+        }
+        
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .achievement-number {
+            font-size: 2rem;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-text {
+            color: var(--white);
+            font-size: 1rem;
+        }
+        
+        footer {
+            background-color: var(--black);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 2px solid var(--burgundy);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+        
+        .footer-section h3 span {
+            color: var(--burgundy);
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .social-links a:hover {
+            color: var(--burgundy);
+            background-color: var(--white);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid var(--burgundy);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Адаптивность */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: var(--black);
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                border-top: 2px solid var(--burgundy);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                animation: slideDown 0.5s ease;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(128, 0, 32, 0.3);
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            /* Анимация бургер-меню */
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+            
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+        
+        /* Стили для активной страницы в навигации */
+        .nav-links a.active {
+            color: var(--burgundy);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">MÅNE<span>SKIN</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html" class="active">О группе</a></li>
+                    <li><a href="history.html">История</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>О <span>ГРУППЕ</span></h1>
+            <p>Узнайте больше об участниках и творчестве Måneskin</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>История группы</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Måneskin — итальянская рок-группа, образованная в Риме в 2016 году. Группа состоит из вокалиста Дамиано Давида, басистки Виктории Де Анджелис, гитариста Томаса Раджи и барабанщика Итана Торкио.</p>
+                    <p>Название группы Måneskin означает «лунный свет» на датском языке. Участники группы познакомились в школе и начали выступать на улицах Рима, прежде чем добиться международного успеха.</p>
+                    <p>Группа приобрела мировую известность после победы на конкурсе «Евровидение-2021» с песней «Zitti e buoni». Их музыка сочетает в себе элементы хард-рока, глэм-рока и поп-музыки.</p>
+                    <p>После победы на Евровидении, Måneskin выпустили несколько успешных синглов, включая "I Wanna Be Your Slave" и "Mammamia", которые попали в чарты по всему миру.</p>
+                    <a href="history.html" class="btn" style="margin-top: 20px;">Подробнее об истории</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://i.pinimg.com/1200x/47/fb/fe/47fbfe098c4dc998e4c0b03a3f16ea23.jpg" alt="Måneskin группа">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-light">
+        <div class="container">
+            <h2>Участники группы</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="https://i.pinimg.com/736x/15/79/c5/1579c5c2e79c0eb6bb86fbcd347faef0.jpg" alt="Дамиано Давид">
+                    </div>
+                    <div class="member-info">
+                        <h3>Дамиано Давид</h3>
+                        <span class="member-role">Вокалист</span>
+                        <p class="member-bio">Родился 8 января 1999 года в Риме. Известен своим харизматичным вокалом и сценическим присутствием. До прихода в группу участвовал в школьных театральных постановках.</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="https://i.pinimg.com/736x/2b/74/d7/2b74d72239b695f84953b26701bc9d98.jpg" alt="Виктория Де Анджелис">
+                    </div>
+                    <div class="member-info">
+                        <h3>Виктория Де Анджелис</h3>
+                        <span class="member-role">Бас-гитаристка</span>
+                        <p class="member-bio">Родилась 28 апреля 2000 года в Риме. Играет на бас-гитаре и является одним из основателей группы. Также пишет тексты для песен группы.</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=4b44c630c09d9247515ad09dc98d8ac4_l-8174067-images-thumbs&n=13" alt="Томас Раджи">
+                    </div>
+                    <div class="member-info">
+                        <h3>Томас Раджи</h3>
+                        <span class="member-role">Гитарист</span>
+                        <p class="member-bio">Родился 18 мая 1999 года в Риме. Отвечает за гитарные партии и бэк-вокал в группе. Начал играть на гитаре в 11 лет, вдохновляясь классическим роком.</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="https://i.pinimg.com/736x/da/33/83/da33839b9a938cc2a051857f2159d33d.jpg" alt="Итан Торкио">
+                    </div>
+                    <div class="member-info">
+                        <h3>Итан Торкио</h3>
+                        <span class="member-role">Барабанщик</span>
+                        <p class="member-bio">Родился 8 октября 1998 года в Риме. Обеспечивает ритмическую основу для музыки группы. Присоединился к группе последним, завершив окончательный состав.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Музыкальные достижения</h2>
+            <div class="achievements">
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-number">1</div>
+                        <div class="achievement-text">Победа на Евровидении</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">💿</div>
+                        <div class="achievement-number">3</div>
+                        <div class="achievement-text">Студийных альбома</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🌍</div>
+                        <div class="achievement-number">50+</div>
+                        <div class="achievement-text">Стран с концертами</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🎵</div>
+                        <div class="achievement-number">5B+</div>
+                        <div class="achievement-text">Просмотров на YouTube</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 50px;">Дискография</h2>
+            <div class="discography">
+                <div class="albums-grid">
+                    <div class="album-card">
+                        <div class="album-year">2017</div>
+                        <div class="album-title">Chosen</div>
+                        <div class="album-type">EP</div>
+                    </div>
+                    <div class="album-card">
+                        <div class="album-year">2018</div>
+                        <div class="album-title">Il ballo della vita</div>
+                        <div class="album-type">Студийный альбом</div>
+                    </div>
+                    <div class="album-card">
+                        <div class="album-year">2021</div>
+                        <div class="album-title">Teatro d'ira: Vol. I</div>
+                        <div class="album-type">Студийный альбом</div>
+                    </div>
+                    <div class="album-card">
+                        <div class="album-year">2023</div>
+                        <div class="album-title">RUSH!</div>
+                        <div class="album-type">Студийный альбом</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MÅNE<span>SKIN</span></h3>
+                    <p>Фан-сайт итальянской рок-группы</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--white); text-decoration: none;">Главная</a></li>
+                        <li style="margin-bottom: 8px;"><a href="about.html" style="color: var(--white); text-decoration: none;">О группе</a></li>
+                        <li style="margin-bottom: 8px;"><a href="history.html" style="color: var(--white); text-decoration: none;">История</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Официальные социальные сети</h3>
+                    <div class="social-links">
+                        <a href="https://music.apple.com/us/artist/måneskin/1312874741" target="_blank">AppleMusic</a>
+                        <a href="https://www.youtube.com/@maneskinofficial" target="_blank">YouTube</a>
+                        <a href="https://open.spotify.com/artist/0lAWpj5szCSwM4rUMHYmrr" target="_blank">Spotify</a>
+                        <a href="https://www.tiktok.com/@therealmaneskin?_r=1&_t=ZS-91mtiNFVNTR" target="_blank">TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Фан-сайт Måneskin. Все права на музыку принадлежат группе Måneskin.</p>
+                <p>Это неофициальный фан-сайт, созданный в образовательных целях.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигационное меню
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('toggle');
+            });
+        });
+    </script>
+</body>
+</html>
